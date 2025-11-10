@@ -126,4 +126,3 @@ Make sure to:
 ## License
 
 This project is created for assessment purposes.
-# Updated
