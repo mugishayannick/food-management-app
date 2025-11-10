@@ -1,36 +1,129 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Food Management App
+
+A functional and user-friendly web application built with Next.js and TypeScript for managing food items. This application allows users to search, add, edit, and remove food items efficiently.
+
+## Features
+
+- 🔍 Search for food items quickly and accurately
+- ➕ Add new food items with validation
+- ✏️ Edit existing food items
+- 🗑️ Delete food items
+- 📱 Fully responsive design
+- ⚡ Optimized performance with loading states
+- 🎨 Smooth animations and transitions
+- ✅ Comprehensive form validation
+- 🧪 Test coverage for critical scenarios
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **HTTP Client**: Axios
+- **Testing**: Jest, React Testing Library
+- **API**: MockAPI (https://6852821e0594059b23cdd834.mockapi.io/)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone <repository-url>
+cd food-management-app
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run test` - Run tests
+- `npm run test:watch` - Run tests in watch mode
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+food-management-app/
+├── app/                 # Next.js app directory
+│   ├── layout.tsx      # Root layout
+│   └── page.tsx        # Home page
+├── components/         # React components
+├── lib/                # Utility functions
+│   └── api.ts         # API client
+├── types/              # TypeScript type definitions
+│   └── index.ts
+├── styles/             # Global styles
+├── __tests__/          # Test files
+└── .cursorrules        # Project requirements and guidelines
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## API Endpoints
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The application uses MockAPI for data management:
 
-## Deploy on Vercel
+- `GET /food` - Get all food items
+- `GET /food/:id` - Get a single food item
+- `POST /food` - Create a new food item
+- `PUT /food/:id` - Update a food item
+- `DELETE /food/:id` - Delete a food item
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Naming Conventions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- CSS classes must start with `.food-` prefix
+- Test IDs must start with `food-` prefix
+- Components use PascalCase
+- Files use kebab-case or PascalCase for components
+
+## Testing
+
+The project includes test coverage for:
+
+- Component rendering
+- User interactions
+- API mocking and error handling
+
+Run tests with:
+
+```bash
+npm run test
+```
+
+## Deployment
+
+The application can be deployed to:
+
+- Vercel (preferred)
+- Netlify
+- GitHub Pages
+
+Make sure to:
+
+- Deploy from the `main` branch
+- Ensure HTTPS is enabled
+- Verify all environment variables are set
+
+## License
+
+This project is created for assessment purposes.
