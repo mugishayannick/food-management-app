@@ -1,0 +1,221 @@
+FoodWagen Site
+(Web)
+
+Welcome to A2SV Project Interview
+Hello Candidate, and welcome.
+This technical interview is designed to evaluate how you approach real-world engineering challenges. We’re not only interested in what you know, but in how you build, how you structure your code, reason through problems, and make implementation decisions.
+We’re looking for engineers who write clean, scalable, and well-documented code that reflects best practices and attention to detail.
+Show us your best work. Communicate your thought process, explain your trade-offs, and deliver code you’d confidently deploy in a real environment.
+Good luck. We are excited to see what you can build.
+
+Overview
+Your challenge is to implement a functional and user-friendly web page using Next.js and TypeScript, based on a provided Figma design. You will connect this frontend to a mock API for data.
+This task evaluates your ability to translate design into code, build reusable components, manage application state, and interact with a REST API, while following best practices in code structure and maintainability.
+Duration
+Deadline: The candidate is expected to submit the project latest by Wednesday, November 12, 2025, by 12:00 PM CAT(UTC+2)  
+No submissions or commits should be made after the timer ends. Pushing changes after the timer ends will result in disqualification.
+Design & API Resources
+Figma Design: Design Link
+Figma Prototype: Prototype Link
+API Endpoint: You will use a mock API for this project.
+https://6852821e0594059b23cdd834.mockapi.io/
+Goal
+The objective of this web assessment is to create a functional and user-friendly website that allows users to efficiently manage food items. The system should enable users to:
+Search for food items quickly and accurately.
+Add, edit, and remove food items with ease.
+View a well-organized list of available food items.
+The implementation should ensure a seamless user experience while maintaining data integrity and system responsiveness.
+Steps to Follow
+Implementation
+Aim to implement as much of the Figma design as possible.
+Use reusable components and clean code practices.
+Adhere to accessibility and semantic HTML standards.
+Follow the Candidate Submission Guidelines for UI and form elements (outlined below).
+Version Control
+Create a new public repository on GitHub for your submission.
+Commit your progress regularly with meaningful commit messages (e.g., "Added header component").
+Ensure all your code is pushed to the repository before the timer ends.
+Submission
+Deploy your project to a live environment (Vercel, Netlify, or GitHub Pages).
+Double-check that your repository is public and accessible.
+Submit your GitHub repository link and project URL through the provided Google Form.
+Disqualification Criteria
+Pushing changes to the repository after the timer ends.
+Submitting incomplete or inaccessible repositories.
+
+API endpoints for Food Wagen
+Get Featured Foods (Restaurants): https://6852821e0594059b23cdd834.mockapi.io/Food
+Some foods returned by the API may not include restaurant information. Candidates should handle and display such cases gracefully in the UI.
+
+Create Food: https://6852821e0594059b23cdd834.mockapi.io/Food
+
+- Created foods are expected to be associated with restaurants (name, logo, status). Candidates should ensure this association when submitting new food items.
+  Update Food: https://6852821e0594059b23cdd834.mockapi.io/Food/[id]
+
+Delete Food: https://6852821e0594059b23cdd834.mockapi.io/Food/[id]
+Filter foods: https://6852821e0594059b23cdd834.mockapi.io/Food?name=[searchParam]
+
+Candidate Submission Guidelines
+General Structure
+Component Naming
+Use clear and descriptive names for components, classes, and IDs.
+Ensure proper folder structure for components (e.g., /components, /pages, /styles).
+CSS Class Rules
+Allowed Class Naming:
+Vanilla CSS: All classes must start with .food- (e.g., .food-card, .food-status).
+Tailwind: Custom classes must include the food- prefix (e.g., food-btn, food-item).
+Test ID Convention
+All test IDs must start with food-
+Example: data-test-id="food-delete-btn"
+Mandatory Test Coverage
+Candidates must write tests for at least 3 critical scenarios, covering:
+Component Rendering
+Verify that the component renders correctly with expected props (e.g., displays food name, price, or rating).
+User Interaction
+Test one interactive element (choose either):
+Button click (e.g., delete, edit, or submit actions).
+Form input and submission
+API Mocking
+Test one API-related behavior (choose either):
+Successful data fetch and display (e.g., mock GET request).
+Error handling (e.g., failed API request shows error message).
+.API calls must be mocked (no real network requests in tests)
+Form Input Naming
+Use descriptive attributes for input elements to make them easily identifiable:
+Food Name: input[name="food_name"]
+Food Rating: input[name="food_rating"] (type should be number).
+Food Image URL: input[name="food_image"].
+Restaurant Name: input[name="restaurant_name"].
+Restaurant Logo URL: input[name="restaurant_logo"].
+Restaurant Status: input[name="restaurant_status"] (values should be “Open Now” or “Closed”).
+Dropdown Options
+Only allowed values:
+"Open Now"
+"Closed"
+Default: First option selected
+Validation Rules
+Show error messages when:
+Required field is empty
+Rating is outside 1-5 range
+Image URL is invalid
+Error element IDs must follow:
+id="restaurant_name-error"
+id="restaurant_rating-error"
+id="restaurant_image-error"
+Form must reset after successful submission
+
+Buttons
+Use descriptive and clear labels for all buttons (e.g., "Add Food", "Subscribe").
+Avoid vague labels like "Click Me" or "Submit".
+Loading States (Required)
+When:
+During API calls (add/edit/delete actions)
+During form submissions
+Visual Indicators:
+Show spinner icon + disabled state
+Change button text to:
+"Adding Food..." / "Updating Food..."
+Behavior:
+Disable interaction until operation completes
+Revert to original state afterward
+
+Input Fields
+Placeholder Text
+Must include the "food" term where relevant.
+Examples:
+
+“Enter food name”
+
+“Select food category”
+
+“Food price ($)”
+
+Prohibited: Generic placeholders like “Enter text” or “Choose option”
+Label Requirements
+Accessibility:
+All inputs must have associated label elements
+Use aria-describedby for error messages
+CSS Class/ID Naming
+Required prefix: .food- or #food-
+.food-input
+#food-search
+Cards and Lists
+For any card (e.g., a food card), ensure the following structure:
+Name: .food-name
+Price: .food-price
+Rating: .food-rating
+Restaurant Name: .restaurant-name
+Restaurant Status: .restaurant-status (e.g., “Open Now” or “Closed”)
+Restaurant Logo: .restaurant-logo
+Use semantic HTML elements like <div>, <section>, and <article> as needed.
+Entry Animation (Required)
+Type: Slide-up
+Duration: 300ms
+Trigger: On initial load/data fetch
+Hover Animation (Required)
+Type: any hover animation
+Transition: 150ms ease-out
+Requirement: Must not affect card dimensions
+
+Validation and Error Handling
+Ensure all required fields are validated and display clear error messages for invalid inputs or actions.
+Assign the following IDs for error message elements based on the input names to keep the structure consistent:
+Food Name: food-name-error
+Food Rating: food-rating-error
+Food Image URL: food-image-error
+Restaurant Name: restaurant-name-error
+Restaurant Logo URL: restaurant-logo-error
+Restaurant Status: restaurant-status-error
+
+Use the following descriptive and user-friendly error messages:
+“Food Name is required” for food-name-error.
+“Food Rating must be a number” for food-rating-error.
+“Food Image URL is required” for food-image-error.
+“Restaurant Name is required” for restaurant-name-error.
+“Restaurant Logo URL is required” for restaurant-logo-error.
+“Restaurant Status must be ‘Open Now’ or ‘Closed’” for restaurant-status-error.
+Empty States
+Implement empty states with meaningful messages (e.g., "No items available" in a <div> with .empty-state-message).
+Mandatory Elements
+Heading: Must include descriptive header
+Description: Actionable guidance (25-50 characters)
+Footer
+Include navigation links and company information in the footer.
+Modal
+Trigger modals with a button labeled "Add Food", “Edit Food” and “Delete Food”.
+Ensure all modal fields have descriptive names and IDs (e.g., input[name="food_name"]).
+Include "Save" and "Cancel" buttons.
+All modals must:
+Have 100% width on mobile
+Centered in desktop view
+
+Assessment Criteria
+Functionality: How well the implemented features match the Figma design.
+Code Quality: Readability, reusability, and adherence to best practices.
+UI/UX: Consistency with the provided design and user-friendly interactions.
+Backend integration:
+Proper integration with provided backend API endpoints (e.g., GET, POST, PUT, DELETE operations).
+Uses tools like Axios or Fetch with good async handling (try/catch, error boundaries, etc.).
+Submission:
+Proper GitHub repository structure, accessibility, and compliance with the submission deadline.
+Deployment Mandates
+Platform: Vercel (preferred), Netlify, or GitHub Pages
+Live URL: Must be accessible via HTTPS
+Branch: main branch must be deployed
+Bonus Criteria (Optional but Encouraged!)
+Advanced state management (Redux, Zod, Query.js, etc.).
+Fully responsive design (works flawlessly on mobile, tablet, and desktop).
+Optimized performance (lazy loading, memoization, efficient API calls).
+
+Final Notes and Submission Guideline
+Ensure your GitHub repository is fully pushed and accessible before the timer ends.
+Follow all naming and structural conventions outlined in the Candidate Submission Guidelines.
+Contact the examiner for any clarifications during the test.
+Ensure your project is deployed
+Submit your GitHub repository link and project url through the provided Google Form.
+
+Figma: Design Link
+Figma: Prototype Link
+Google form : Submission Link
+
+Good luck! 👋
