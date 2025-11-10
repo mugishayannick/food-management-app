@@ -50,9 +50,6 @@ export default function App() {
   } = useFoods();
   const filteredFoods = useSearch(foods, searchQuery);
 
-  console.log(filteredFoods, "filtered");
-  console.log(foods, "original");
-
   const handleOperationSuccess = useCallback(() => {
     refetch();
   }, [refetch]);
