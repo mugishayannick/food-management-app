@@ -1,9 +1,10 @@
 import { Instagram, Facebook, Twitter } from "lucide-react";
+import { Button } from "./Button";
 
 function Items() {
   return (
     <div
-      className="content-stretch flex flex-col gap-[16px] items-start leading-none not-italic relative shrink-0 text-[18px] text-neutral-100 text-nowrap whitespace-pre"
+      className="content-stretch flex flex-col gap-[16px] items-start leading-none not-italic relative shrink-0 text-[18px] text-neutral-100 text-nowrap whitespace-pre font-normal"
       data-name="Items"
     >
       <p className="relative shrink-0">About us</p>
@@ -17,7 +18,7 @@ function Items() {
 function Items1() {
   return (
     <div
-      className="content-stretch flex flex-col gap-[16px] items-start leading-none not-italic relative shrink-0 text-[18px] text-neutral-100 text-nowrap whitespace-pre"
+      className="content-stretch flex flex-col gap-[16px] items-start leading-none not-italic relative shrink-0 text-[18px] text-neutral-100 text-nowrap whitespace-pre font-normal"
       data-name="Items"
     >
       <p className="relative shrink-0">{`Help & Support`}</p>
@@ -30,7 +31,7 @@ function Items1() {
 function Items2() {
   return (
     <div
-      className="content-stretch flex flex-col gap-[16px] items-start leading-none not-italic relative shrink-0 text-[18px] text-neutral-100 text-nowrap whitespace-pre"
+      className="content-stretch flex flex-col gap-[16px] items-start leading-none not-italic relative shrink-0 text-[18px] text-neutral-100 text-nowrap whitespace-pre font-normal"
       data-name="Items"
     >
       <p className="relative shrink-0">{`Terms & Conditions`}</p>
@@ -47,7 +48,7 @@ function FooterMenuItems() {
       className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0"
       data-name="Footer Menu Items"
     >
-      <p className="leading-[1.2] not-italic relative shrink-0 text-[22px] text-nowrap text-white whitespace-pre">
+      <p className="leading-[1.2] not-italic relative shrink-0 text-[22px] text-nowrap text-white whitespace-pre font-bold">
         Company
       </p>
       <Items />
@@ -61,7 +62,7 @@ function FooterMenuItems1() {
       className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0"
       data-name="Footer Menu Items"
     >
-      <p className="leading-[1.2] not-italic relative shrink-0 text-[22px] text-nowrap text-white whitespace-pre">
+      <p className="leading-[1.2] not-italic relative shrink-0 text-[22px] text-nowrap text-white whitespace-pre font-bold">
         Contact
       </p>
       <Items1 />
@@ -75,7 +76,7 @@ function FooterMenuItems2() {
       className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0"
       data-name="Footer Menu Items"
     >
-      <p className="leading-[1.2] not-italic relative shrink-0 text-[22px] text-nowrap text-white whitespace-pre">
+      <p className="leading-[1.2] not-italic relative shrink-0 text-[22px] text-nowrap text-white whitespace-pre font-bold">
         Legal
       </p>
       <Items2 />
@@ -86,7 +87,7 @@ function FooterMenuItems2() {
 function Menu() {
   return (
     <div
-      className="content-stretch flex flex-col sm:flex-row items-start justify-between gap-8 sm:gap-0 relative shrink-0 w-full sm:w-auto sm:min-w-[607px]"
+      className="content-stretch flex flex-col sm:flex-row items-start justify-between gap-8 sm:gap-0 relative shrink-0 w-full sm:w-auto sm:min-w-0 lg:min-w-[400px] xl:min-w-[607px]"
       data-name="Menu"
     >
       <FooterMenuItems />
@@ -99,12 +100,12 @@ function Menu() {
 function Icons() {
   return (
     <div
-      className="content-stretch flex gap-[16px] items-start leading-none not-italic opacity-80 relative shrink-0 text-[24px] text-neutral-100 text-nowrap whitespace-pre"
+      className="content-stretch flex gap-[16px] items-start leading-none not-italic opacity-80 relative shrink-0 text-[24px] text-neutral-100 whitespace-pre flex-wrap"
       data-name="Icons"
     >
-      <Instagram className="w-6 h-6" />
-      <Facebook className="w-6 h-6" />
-      <Twitter className="w-6 h-6" />
+      <Instagram className="w-6 h-6 flex-shrink-0" />
+      <Facebook className="w-6 h-6 flex-shrink-0" />
+      <Twitter className="w-6 h-6 flex-shrink-0" />
     </div>
   );
 }
@@ -112,10 +113,10 @@ function Icons() {
 function FollowUs() {
   return (
     <div
-      className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0"
+      className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0 min-w-0"
       data-name="Follow Us"
     >
-      <p className="leading-[1.2] not-italic opacity-60 relative shrink-0 text-[18px] text-neutral-100 text-nowrap uppercase whitespace-pre">
+      <p className="leading-[1.2] not-italic opacity-60 relative shrink-0 text-[18px] text-footer-text-light uppercase whitespace-pre font-bold">
         Follow Us
       </p>
       <Icons />
@@ -126,16 +127,16 @@ function FollowUs() {
 function TextField() {
   return (
     <div
-      className="basis-0 bg-[#424242] grow h-full min-h-px min-w-px relative rounded-[8px] shrink-0"
+      className="basis-0 bg-footer-input-bg grow h-full min-h-px min-w-px relative rounded-[8px] shrink-0"
       data-name="Text Field"
     >
       <div className="flex flex-row items-center size-full">
-        <div className="box-border content-stretch flex gap-[10px] items-center leading-[1.4] pb-[8px] pl-[16px] pr-0 pt-[7px] relative size-full text-[#adadad] text-nowrap whitespace-pre">
+        <div className="box-border content-stretch flex gap-[10px] items-center leading-[1.4] pb-[8px] pl-[16px] pr-0 pt-[7px] relative size-full text-footer-text-medium text-nowrap whitespace-pre">
           <span className="not-italic relative shrink-0 text-[24px]">✉</span>
           <input
             type="email"
             placeholder="Enter Your email"
-            className="bg-transparent outline-none font-normal relative shrink-0 text-[18px] text-[#adadad] placeholder:text-[#adadad] flex-1"
+            className="bg-transparent outline-none font-normal relative shrink-0 text-[18px] text-footer-text-medium placeholder:text-footer-text-medium flex-1"
           />
         </div>
       </div>
@@ -143,29 +144,26 @@ function TextField() {
   );
 }
 
-function Button() {
+function SubscribeButton() {
   return (
-    <button
-      className="bg-gradient-to-l from-[#f17228] to-[#ffb30e] box-border content-stretch flex gap-[10px] items-center justify-center px-[24px] py-[21px] relative rounded-[8px] shadow-[0px_5px_8px_0px_rgba(222,151,0,0.24),0px_14px_32px_0px_rgba(255,178,14,0.29)] shrink-0 w-[133px] hover:shadow-lg transition-all duration-150"
-      data-name="Button"
-    >
-      <p className="leading-none not-italic relative shrink-0 text-[18px] text-center text-nowrap text-white whitespace-pre">
-        Subscribe
-      </p>
-    </button>
+    <Button variant="primary" size="lg" className="max-[425px]:w-full">
+      Subscribe
+    </Button>
   );
 }
 
 function TextFieldButton() {
   return (
     <div
-      className="content-stretch flex gap-[16px] items-center relative shrink-0 w-full"
+      className="content-stretch flex flex-row max-[425px]:flex-col gap-[16px] items-center max-[425px]:items-stretch relative shrink-0 w-full"
       data-name="Text Field + Button"
     >
-      <div className="basis-0 flex flex-row grow items-center self-stretch shrink-0">
+      <div className="basis-0 flex flex-row grow items-center self-stretch shrink-0 max-[425px]:basis-auto max-[425px]:w-full">
         <TextField />
       </div>
-      <Button />
+      <div className="max-[425px]:w-full">
+        <SubscribeButton />
+      </div>
     </div>
   );
 }
@@ -176,7 +174,7 @@ function Subscription() {
       className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0 w-full"
       data-name="Subscription"
     >
-      <p className="leading-[1.4] relative shrink-0 text-[#bbbbbb] text-[18px] w-full">
+      <p className="leading-[1.4] relative shrink-0 text-footer-text-lighter text-[18px] w-full font-bold">
         Receive exclusive offers in your mailbox
       </p>
       <TextFieldButton />
@@ -187,7 +185,7 @@ function Subscription() {
 function FollowSubscription() {
   return (
     <div
-      className="content-stretch flex flex-col gap-[43px] items-start relative shrink-0 w-full sm:w-[483px]"
+      className="content-stretch flex flex-col gap-[43px] items-start relative shrink-0 w-full sm:w-auto lg:max-w-[483px] lg:flex-shrink"
       data-name="Follow + Subscription"
     >
       <FollowUs />
@@ -199,7 +197,7 @@ function FollowSubscription() {
 function MenuSubscription() {
   return (
     <div
-      className="content-stretch flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-0 relative shrink-0 w-full"
+      className="content-stretch flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-8 xl:gap-0 relative shrink-0 w-full min-w-0"
       data-name="Menu + Subscription"
     >
       <Menu />
@@ -211,13 +209,13 @@ function MenuSubscription() {
 function Copyright() {
   return (
     <div
-      className="content-stretch flex gap-[10px] items-center relative shrink-0 text-neutral-100 text-nowrap whitespace-pre"
+      className="content-stretch flex gap-[10px] items-center relative shrink-0 text-neutral-100 text-nowrap whitespace-pre min-w-0"
       data-name="Copyright"
     >
-      <p className="font-normal leading-[1.2] relative shrink-0 text-[15px]">
+      <p className="font-normal leading-[1.2] relative shrink-0 text-[15px] max-[320px]:text-xs">
         All rights Reserved
       </p>
-      <p className="leading-[normal] not-italic relative shrink-0 text-[16px]">
+      <p className="leading-[normal] not-italic relative shrink-0 text-[16px] max-[320px]:text-xs">
         ©
       </p>
     </div>
@@ -227,10 +225,10 @@ function Copyright() {
 function Company() {
   return (
     <div
-      className="content-stretch flex gap-[8px] items-start relative shrink-0"
+      className="content-stretch flex gap-[8px] items-start relative shrink-0 min-w-0"
       data-name="Company"
     >
-      <p className="leading-[1.2] relative shrink-0 text-[15px] text-neutral-100 text-nowrap whitespace-pre">
+      <p className="leading-[1.2] relative shrink-0 text-[15px] max-[320px]:text-xs text-neutral-100 text-nowrap whitespace-pre font-bold break-words">
         Your Company, 2021
       </p>
     </div>
@@ -240,7 +238,7 @@ function Company() {
 function RIghts() {
   return (
     <div
-      className="content-stretch flex gap-[10px] items-start relative shrink-0"
+      className="content-stretch flex flex-col max-[320px]:flex-col sm:flex-row gap-[10px] items-start relative shrink-0 min-w-0"
       data-name="RIghts"
     >
       <Copyright />
@@ -252,10 +250,10 @@ function RIghts() {
 function ThemeWagon() {
   return (
     <div
-      className="content-stretch flex gap-[4px] items-start relative shrink-0"
+      className="content-stretch flex gap-[4px] items-start relative shrink-0 min-w-0"
       data-name="ThemeWagon"
     >
-      <p className="leading-[1.2] relative shrink-0 text-[15px] text-neutral-100 text-nowrap whitespace-pre">
+      <p className="leading-[1.2] relative shrink-0 text-[15px] max-[320px]:text-xs text-neutral-100 text-nowrap whitespace-pre font-bold break-words">
         Themewagon
       </p>
     </div>
@@ -265,10 +263,10 @@ function ThemeWagon() {
 function MadeBy() {
   return (
     <div
-      className="content-stretch flex gap-[8px] items-start relative shrink-0"
+      className="content-stretch flex flex-col max-[320px]:flex-col sm:flex-row gap-[8px] items-start relative shrink-0 min-w-0"
       data-name="Made By"
     >
-      <p className="font-normal leading-[1.2] relative shrink-0 text-neutral-100 text-nowrap whitespace-pre text-[15px]">
+      <p className="font-normal leading-[1.2] relative shrink-0 text-neutral-100 text-nowrap whitespace-pre text-[15px] max-[320px]:text-xs">
         Made with 💛 by
       </p>
       <ThemeWagon />
@@ -279,7 +277,7 @@ function MadeBy() {
 function Rights() {
   return (
     <div
-      className="content-stretch flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0 relative shrink-0 w-full"
+      className="content-stretch flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0 relative shrink-0 w-full min-w-0"
       data-name="Rights"
     >
       <RIghts />
@@ -320,7 +318,7 @@ function HrRights() {
 function MenuSubscriptionRights() {
   return (
     <div
-      className="content-stretch flex flex-col gap-[63px] items-start relative shrink-0 w-full max-w-full px-4 sm:px-6 md:px-8 lg:px-[100px] xl:px-[200px] py-8 sm:py-12 lg:py-[60px]"
+      className="content-stretch flex flex-col gap-[63px] items-start relative shrink-0 w-full max-w-full px-2 sm:px-4 md:px-6 lg:px-[50px] xl:px-[100px] 2xl:px-[200px] py-8 sm:py-12 lg:py-[60px] overflow-x-hidden"
       data-name="Menu + Subscription + Rights"
     >
       <div className="h-0 relative shrink-0 w-full" data-name="HR">
@@ -350,7 +348,7 @@ function MenuSubscriptionRights() {
 export function Footer() {
   return (
     <footer
-      className="food-footer bg-[#212121] content-stretch flex flex-col items-center justify-center relative w-full"
+      className="food-footer bg-footer-bg content-stretch flex flex-col items-center justify-center relative w-full"
       data-name="CTA + Footer"
     >
       <MenuSubscriptionRights />

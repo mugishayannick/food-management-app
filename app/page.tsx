@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
+import Image from "next/image";
 import { FoodCard } from "@/components/FoodCard";
 import { FoodModal } from "@/components/FoodModal";
 import { DeleteConfirmationModal } from "@/components/DeleteConfirmationModal";
@@ -15,20 +16,13 @@ import {
 } from "lucide-react";
 import { useFoods } from "@/hooks/useFoods";
 import { useFoodOperations } from "@/hooks/useFoodOperations";
-import { useSearch } from "@/hooks/useSearch";
 import { useFoodModal } from "@/context/FoodModalContext";
 import { toast } from "react-hot-toast";
-
-// Import images from Figma
+import { foodApi } from "@/lib/api";
+import { Button } from "@/components/Button";
+import { LOADING_MESSAGES, SUCCESS_MESSAGES } from "@/constants";
 import imgImageBase from "@/public/img/Food_image.png";
 
-/**
- * Main page component for Food Management App
- * Follows SOLID principles:
- * - Single Responsibility: Handles UI composition and user interactions
- * - Open/Closed: Extensible through hooks and components
- * - Dependency Inversion: Depends on abstractions (hooks) rather than concrete implementations
- */
 export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState<"delivery" | "pickup">("delivery");
@@ -37,21 +31,27 @@ export default function App() {
     id: string;
     name: string;
   } | null>(null);
-
-  // Modal context
+  const [searchResults, setSearchResults] = useState<FoodItem[] | null>(null);
+  const [isSearching, setIsSearching] = useState(false);
   const { isModalOpen, editingItem, openModal, closeModal } = useFoodModal();
 
-  // Custom hooks for data management
   const {
     foods,
     isLoading: isLoadingFoods,
     error: foodsError,
     refetch,
   } = useFoods();
-  const filteredFoods = useSearch(foods, searchQuery);
+
+  // Memoize displayed foods to avoid recalculating on every render
+  const displayedFoods = useMemo(
+    () => (searchResults !== null ? searchResults : foods),
+    [searchResults, foods]
+  );
 
   const handleOperationSuccess = useCallback(() => {
     refetch();
+    setSearchResults(null);
+    setSearchQuery("");
   }, [refetch]);
 
   const {
@@ -61,7 +61,6 @@ export default function App() {
     isLoading: isOperationLoading,
   } = useFoodOperations(handleOperationSuccess);
 
-  // Modal handlers
   const handleEditFood = useCallback(
     (item: FoodItem) => {
       openModal(item);
@@ -69,7 +68,6 @@ export default function App() {
     [openModal]
   );
 
-  // Food operations
   const handleSaveFood = useCallback(
     async (formData: FoodFormData) => {
       if (editingItem?.id) {
@@ -86,14 +84,14 @@ export default function App() {
     (id: string) => {
       if (!id) return;
 
-      const item = foods.find((item) => item.id === id);
-      if (item) {
-        setItemToDelete({
-          id,
-          name: item.food_name || "this food item",
-        });
-        setDeleteModalOpen(true);
-      }
+      const item = foods.find((food) => food.id === id);
+      if (!item) return;
+
+      setItemToDelete({
+        id,
+        name: item.food_name || item.name || "this food item",
+      });
+      setDeleteModalOpen(true);
     },
     [foods]
   );
@@ -102,8 +100,8 @@ export default function App() {
     if (!itemToDelete) return;
 
     toast.promise(deleteFood(itemToDelete.id), {
-      loading: "Deleting food item...",
-      success: "Food item deleted successfully!",
+      loading: LOADING_MESSAGES.DELETING,
+      success: SUCCESS_MESSAGES.FOOD_DELETED,
       error: (err) =>
         `Failed to delete food item: ${err.message || "Unknown error"}`,
     });
@@ -119,31 +117,73 @@ export default function App() {
     }
   }, [isOperationLoading]);
 
-  const handleSearch = useCallback((e: React.FormEvent) => {
-    e.preventDefault();
-    // Search is handled by useSearch hook through filteredFoods
-  }, []);
+  const handleSearch = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+
+      const query = searchQuery.trim();
+
+      if (!query) {
+        setSearchResults(null);
+        toast.error("Please enter a search term");
+        return;
+      }
+
+      setIsSearching(true);
+      try {
+        const results = await foodApi.search(query);
+        setSearchResults(results);
+
+        if (results.length > 0) {
+          toast.success(
+            `Found ${results.length} food item${results.length > 1 ? "s" : ""}`
+          );
+        }
+      } catch (error) {
+        const errorMessage =
+          error instanceof Error
+            ? error.message
+            : "Failed to search food items. Please try again.";
+        toast.error(errorMessage);
+        setSearchResults(null);
+      } finally {
+        setIsSearching(false);
+      }
+    },
+    [searchQuery]
+  );
+
+  const handleSearchInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      setSearchQuery(value);
+
+      if (!value.trim()) {
+        setSearchResults(null);
+      }
+    },
+    []
+  );
 
   return (
     <div className="w-full overflow-x-hidden">
       {/* Hero Section */}
-      <section className="food-hero bg-[#FF9900] relative overflow-hidden w-full">
-        <div className="relative min-h-[400px] sm:min-h-[500px] lg:h-[628px]">
+      <section className="food-hero bg-hero relative overflow-hidden w-full">
+        <div className="relative min-h-[400px] sm:min-h-[500px] lg:h-[628px] overflow-hidden">
           {/* Background Image - Desktop Only */}
           <div className="absolute top-[182px] left-[1098px] w-[604px] h-[505px] hidden lg:flex items-center justify-center">
-            <div className=" ">
-              <div className="relative">
-                <img
-                  src={
-                    typeof imgImageBase === "string"
-                      ? imgImageBase
-                      : imgImageBase.src || ""
-                  }
-                  alt=""
-                  className="size-full object-contain bg-opacity-0"
-                />
-              </div>
-            </div>
+            <Image
+              src={
+                typeof imgImageBase === "string"
+                  ? imgImageBase
+                  : imgImageBase.src || ""
+              }
+              alt="Food illustration"
+              className="object-contain"
+              width={604}
+              height={505}
+              priority={false}
+            />
           </div>
 
           {/* Hero Content */}
@@ -162,46 +202,38 @@ export default function App() {
             <div className="food-search-card bg-white rounded-[16px] shadow-[0px_5px_10px_0px_rgba(0,0,0,0.1)] overflow-hidden w-full">
               {/* Tabs */}
               <div className="food-tabs flex gap-2 sm:gap-[8px] p-4 sm:p-6 pb-0">
-                <button
+                <Button
                   onClick={() => setActiveTab("delivery")}
-                  className={`food-tab flex gap-2 sm:gap-[10px] items-center px-3 sm:px-6 py-2 sm:py-[10px] rounded-[8px] leading-none transition-all duration-150 text-sm sm:text-base font-medium ${
-                    activeTab === "delivery"
-                      ? "bg-[#FFF0EB] text-[#FF7A45]"
-                      : "bg-white text-[#4A4A4A] hover:bg-gray-50"
-                  }`}
-                  data-testid="food-delivery-tab"
+                  variant={
+                    activeTab === "delivery" ? "tab-active" : "tab-inactive"
+                  }
+                  size="md"
+                  icon={<Bike className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />}
+                  iconPosition="left"
+                  className="food-tab leading-none"
+                  data-test-id="food-delivery-tab"
                 >
-                  <Bike
-                    className={`w-4 h-4 sm:w-[18px] sm:h-[18px] ${
-                      activeTab === "delivery"
-                        ? "text-[#FF7A45]"
-                        : "text-[#4A4A4A]"
-                    }`}
-                  />
-                  <span>Delivery</span>
-                </button>
-                <button
+                  Delivery
+                </Button>
+                <Button
                   onClick={() => setActiveTab("pickup")}
-                  className={`food-tab flex gap-2 sm:gap-[10px] items-center px-3 sm:px-6 py-2 sm:py-[10px] rounded-[8px] leading-none transition-all duration-150 text-sm sm:text-base font-medium ${
-                    activeTab === "pickup"
-                      ? "bg-[#FFF0EB] text-[#FF7A45]"
-                      : "bg-white text-[#4A4A4A] hover:bg-gray-50"
-                  }`}
-                  data-testid="food-pickup-tab"
+                  variant={
+                    activeTab === "pickup" ? "tab-active" : "tab-inactive"
+                  }
+                  size="md"
+                  icon={
+                    <ShoppingBag className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+                  }
+                  iconPosition="left"
+                  className="food-tab leading-none"
+                  data-test-id="food-pickup-tab"
                 >
-                  <ShoppingBag
-                    className={`w-4 h-4 sm:w-[18px] sm:h-[18px] ${
-                      activeTab === "pickup"
-                        ? "text-[#FF7A45]"
-                        : "text-[#4A4A4A]"
-                    }`}
-                  />
-                  <span>Pickup</span>
-                </button>
+                  Pickup
+                </Button>
               </div>
 
               {/* Divider */}
-              <div className="h-[1px] bg-[#EEEEEE] mx-4 sm:mx-6 my-4" />
+              <div className="h-[1px] bg-border-custom mx-4 sm:mx-6 my-4" />
 
               {/* Search */}
               <form
@@ -209,28 +241,38 @@ export default function App() {
                 className="food-search p-4 sm:p-6 pt-0"
               >
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
-                  <div className="food-search-input flex-1 bg-[#F5F5F5] rounded-[8px] flex items-center gap-2 sm:gap-3 px-3 sm:px-4 h-[48px] sm:h-[56px] min-w-0">
-                    <Search className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-[#A0A0A0] flex-shrink-0" />
+                  <div className="food-search-input md:flex-1 bg-search-input-bg rounded-[8px] flex items-center gap-2 sm:gap-3 px-3 sm:px-4 h-[48px] sm:h-[56px] min-w-0">
+                    <Search className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-primary flex-shrink-0 font-bold" />
                     <input
                       id="food-search"
                       type="text"
                       value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
+                      onChange={handleSearchInputChange}
                       placeholder="What do you like to eat today?"
-                      className="flex-1 bg-transparent outline-none text-[#424242] placeholder:text-[#A0A0A0] text-sm sm:text-base lg:text-[18px] leading-[1.4] min-w-0 w-full font-normal h-full"
-                      data-testid="food-search-input"
+                      className="flex-1 bg-transparent outline-none text-text-secondary placeholder:text-search-placeholder text-sm sm:text-base lg:text-[18px] leading-[1.4] min-w-0 w-full font-normal h-full"
+                      data-test-id="food-search-input"
                     />
                   </div>
-                  <button
+                  <Button
                     type="submit"
-                    className="food-find-button bg-[#FF6B4A] flex gap-2 sm:gap-[10px] items-center justify-center px-4 sm:px-8 lg:px-[48px] h-[48px] sm:h-[56px] rounded-[8px] text-white hover:opacity-90 transition-all duration-150 leading-none text-sm sm:text-base lg:text-[18px] font-medium w-full sm:w-auto"
-                    data-testid="food-find-button"
+                    variant="coral"
+                    size="md"
+                    icon={
+                      !isSearching ? (
+                        <Search className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-white" />
+                      ) : undefined
+                    }
+                    iconPosition="left"
+                    isLoading={isSearching}
+                    loadingText={LOADING_MESSAGES.SEARCHING}
+                    fullWidth
+                    className="food-find-button h-[48px] sm:h-[56px] w-full sm:w-auto sm:px-8 lg:px-[48px] leading-none"
+                    data-test-id="food-find-button"
                   >
-                    <Search className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-white" />
-                    <span className="text-sm sm:text-base lg:text-[18px]">
+                    <span className="text-sm sm:text-base lg:text-[18px] font-bold">
                       Find Meal
                     </span>
-                  </button>
+                  </Button>
                 </div>
               </form>
             </div>
@@ -241,13 +283,13 @@ export default function App() {
       {/* Featured Meals */}
       <main className="food-main w-full px-4 sm:px-6 md:px-8 lg:px-[100px] xl:px-[220px] py-8 sm:py-12 lg:py-20">
         <section className="food-featured w-full max-w-full">
-          <h2 className="text-[#212121] text-[28px] sm:text-[32px] md:text-[38px] lg:text-[43px] text-center mb-8 sm:mb-12 lg:mb-[88px] leading-[1.12]">
+          <h2 className="text-text-primary text-[28px] sm:text-[32px] md:text-[38px] lg:text-[43px] text-center mb-8 sm:mb-12 lg:mb-[88px] leading-[1.12] font-bold">
             Featured Meals
           </h2>
 
           {/* Error State */}
           {foodsError && (
-            <div className="food-error-message flex items-center justify-center gap-3 py-[100px] text-[#ff3b30] text-[18px]">
+            <div className="food-error-message flex items-center justify-center gap-3 py-[100px] text-error text-[18px]">
               <AlertCircle className="w-6 h-6" />
               <span>{foodsError}</span>
             </div>
@@ -256,18 +298,18 @@ export default function App() {
           {/* Loading State */}
           {isLoadingFoods && !foodsError && (
             <div className="food-loading flex items-center justify-center py-[100px]">
-              <Loader2 className="w-8 h-8 animate-spin text-[#f17228]" />
+              <Loader2 className="w-8 h-8 animate-spin text-primary" />
             </div>
           )}
 
           {/* Food Items Grid */}
           {!isLoadingFoods && !foodsError && (
             <>
-              {filteredFoods.length > 0 ? (
+              {displayedFoods.length > 0 ? (
                 <div className="food-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-[24px] mb-8 sm:mb-12 lg:mb-[88px] w-full">
-                  {filteredFoods.map((item, index) => (
+                  {displayedFoods.map((item) => (
                     <FoodCard
-                      key={index}
+                      key={item.id}
                       item={item}
                       onEdit={handleEditFood}
                       onDelete={handleDeleteFood}
@@ -275,22 +317,25 @@ export default function App() {
                   ))}
                 </div>
               ) : (
-                <div className="empty-state-message text-center py-[100px] text-[#757575] text-[24px]">
-                  {searchQuery
+                <div className="empty-state-message text-center py-[100px] text-text-tertiary text-[24px]">
+                  {searchResults !== null && searchResults.length === 0
                     ? "No items found matching your search"
-                    : "No items available"}
+                    : "No food items available"}
                 </div>
               )}
 
-              {filteredFoods.length > 0 && (
+              {displayedFoods.length > 0 && (
                 <div className="food-load-more flex justify-center">
-                  <button
-                    className="food-load-button bg-gradient-to-l from-[#f17228] to-[#ffb30e] flex gap-[10px] items-center justify-center px-[48px] py-[21px] rounded-[14px] shadow-[0px_5px_10px_0px_rgba(255,174,0,0.26),0px_20px_40px_0px_rgba(255,174,0,0.29)] text-white hover:shadow-lg transition-all duration-150 leading-none"
-                    data-testid="food-load-more-btn"
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    icon={<ChevronRight className="w-[18px] h-[18px]" />}
+                    iconPosition="right"
+                    className="food-load-button leading-none"
+                    data-test-id="food-load-more-btn"
                   >
-                    <span className="text-[18px]">Load more</span>
-                    <ChevronRight className="w-[18px] h-[18px]" />
-                  </button>
+                    <span className="text-[18px] font-bold">Load more</span>
+                  </Button>
                 </div>
               )}
             </>
@@ -312,7 +357,6 @@ export default function App() {
         isOpen={deleteModalOpen}
         onClose={handleCloseDeleteModal}
         onConfirm={handleConfirmDelete}
-        itemName={itemToDelete?.name}
         isLoading={isOperationLoading}
       />
     </div>
