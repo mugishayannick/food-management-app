@@ -119,6 +119,35 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Food App Custom Colors */
+  --color-primary: #f17228;
+  --color-primary-hover: #e06520;
+  --color-secondary: #ffb30e;
+  --color-hero: #ff9900;
+  --color-tab-active: #ff7a45;
+  --color-tab-active-bg: #fff0eb;
+  --color-tab-inactive: #4a4a4a;
+  --color-tab-inactive-icon: #757575;
+  --color-search-input-bg: #f5f5f5;
+  --color-search-placeholder: #a0a0a0;
+  --color-button-coral: #ff6b4a;
+  --color-status-open: #79b93c;
+  --color-status-closed: #f17228;
+  --color-status-open-bg: rgba(121, 185, 60, 0.2);
+  --color-status-closed-bg: rgba(241, 114, 40, 0.2);
+  --color-error: #ff3b30;
+  --color-text-primary: #212121;
+  --color-text-secondary: #424242;
+  --color-text-tertiary: #757575;
+  --color-border-custom: #eeeeee;
+
+  /* Footer specific colors (dark theme) */
+  --color-footer-bg: #212121;
+  --color-footer-text-light: #f5f5f5;
+  --color-footer-text-medium: #adadad;
+  --color-footer-text-lighter: #bbbbbb;
+  --color-footer-input-bg: #424242;
 }
 
 @layer base {
@@ -207,7 +236,14 @@ html {
 }
 
 /* Hover transitions */
-.food-card,
+.food-card {
+  transition: transform 150ms ease-out;
+}
+
+.food-card:hover {
+  transform: translateY(-4px);
+}
+
 .food-add-button,
 .food-find-button,
 .food-load-button,

@@ -1,4 +1,5 @@
 import svgPaths from "../imports/svg-64lpaevd45";
+import { Button } from "./Button";
 
 interface HeaderProps {
   onAddMeal: () => void;
@@ -123,8 +124,8 @@ function MaskGroup() {
 function Frame() {
   return (
     <div className="content-stretch flex items-start relative shrink-0">
-      <p className="leading-[1.2] not-italic relative shrink-0 text-[#f17228] text-[31.11px] text-nowrap tracking-[-0.7778px] whitespace-pre">
-        Food<span className="text-[#ffb30e]">Wagen</span>
+      <p className="leading-[1.2] not-italic relative shrink-0 text-primary text-[31.11px] text-nowrap tracking-[-0.7778px] whitespace-pre font-bold max-[425px]:hidden">
+        Food<span className="text-secondary">Wagen</span>
       </p>
     </div>
   );
@@ -133,7 +134,7 @@ function Frame() {
 function Logo() {
   return (
     <div
-      className="food-logo content-stretch flex gap-[11.5px] items-center relative shrink-0 w-[197px]"
+      className="food-logo content-stretch flex gap-[11.5px] items-center relative shrink-0 w-[197px] max-[320px]:w-auto"
       data-name="Logo"
     >
       <MaskGroup />
@@ -142,18 +143,19 @@ function Logo() {
   );
 }
 
-function Button({ onClick }: { onClick: () => void }) {
+function AddMealButton({ onClick }: { onClick: () => void }) {
   return (
-    <button
+    <Button
       onClick={onClick}
-      className="food-add-button bg-gradient-to-r from-[#f17228] to-[#ffb30e] box-border content-stretch flex gap-[10px] items-center justify-center px-[24px] py-[12px] relative rounded-[14px] shadow-[0px_5px_10px_0px_rgba(255,174,0,0.26),0px_20px_40px_0px_rgba(255,174,0,0.29)] shrink-0 w-[150px] hover:shadow-lg transition-all duration-150"
-      data-name="Button"
-      data-testid="food-add-meal-btn"
+      variant="primary"
+      size="sm"
+      className="food-add-button w-[150px] max-[320px]:w-auto max-[320px]:min-w-0 max-[320px]:px-2"
+      data-test-id="food-add-meal-btn"
     >
-      <p className="leading-none not-italic relative shrink-0 text-[18px] text-center text-nowrap text-white whitespace-pre">
+      <span className="text-sm sm:text-[18px] max-[320px]:text-xs">
         Add Meal
-      </p>
-    </button>
+      </span>
+    </Button>
   );
 }
 
@@ -164,9 +166,9 @@ export function Header({ onAddMeal }: HeaderProps) {
       data-name="Top Nav"
     >
       <div className="flex flex-row items-center w-full overflow-x-hidden">
-        <div className="box-border content-stretch flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-[100px] xl:px-[220px] py-4 w-full max-w-full">
+        <div className="box-border content-stretch flex items-center justify-between px-2 sm:px-4 md:px-6 lg:px-[100px] xl:px-[220px] py-4 w-full max-w-full gap-2 min-w-0">
           <Logo />
-          <Button onClick={onAddMeal} />
+          <AddMealButton onClick={onAddMeal} />
         </div>
       </div>
     </header>
