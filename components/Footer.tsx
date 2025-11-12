@@ -4,7 +4,7 @@ import { Button } from "./Button";
 function Items() {
   return (
     <div
-      className="content-stretch flex flex-col gap-[16px] items-start leading-none not-italic relative shrink-0 text-[18px] text-neutral-100 text-nowrap whitespace-pre font-normal"
+      className="content-stretch flex flex-col gap-[16px] items-center sm:items-start leading-none not-italic relative shrink-0 text-[18px] text-neutral-100 text-nowrap whitespace-pre font-normal"
       data-name="Items"
     >
       <p className="relative shrink-0">About us</p>
@@ -18,7 +18,7 @@ function Items() {
 function Items1() {
   return (
     <div
-      className="content-stretch flex flex-col gap-[16px] items-start leading-none not-italic relative shrink-0 text-[18px] text-neutral-100 text-nowrap whitespace-pre font-normal"
+      className="content-stretch flex flex-col gap-[16px] items-center sm:items-start leading-none not-italic relative shrink-0 text-[18px] text-neutral-100 text-nowrap whitespace-pre font-normal"
       data-name="Items"
     >
       <p className="relative shrink-0">{`Help & Support`}</p>
@@ -31,7 +31,7 @@ function Items1() {
 function Items2() {
   return (
     <div
-      className="content-stretch flex flex-col gap-[16px] items-start leading-none not-italic relative shrink-0 text-[18px] text-neutral-100 text-nowrap whitespace-pre font-normal"
+      className="content-stretch flex flex-col gap-[16px] items-center sm:items-start leading-none not-italic relative shrink-0 text-[18px] text-neutral-100 text-nowrap whitespace-pre font-normal"
       data-name="Items"
     >
       <p className="relative shrink-0">{`Terms & Conditions`}</p>
@@ -45,10 +45,10 @@ function Items2() {
 function FooterMenuItems() {
   return (
     <div
-      className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0"
+      className="content-stretch flex flex-col gap-[40px] items-center sm:items-start relative shrink-0"
       data-name="Footer Menu Items"
     >
-      <p className="leading-[1.2] not-italic relative shrink-0 text-[22px] text-nowrap text-white whitespace-pre font-bold">
+      <p className="leading-[1.2] not-italic relative shrink-0 text-[22px] text-nowrap text-white whitespace-pre font-bold text-center sm:text-left">
         Company
       </p>
       <Items />
@@ -59,10 +59,10 @@ function FooterMenuItems() {
 function FooterMenuItems1() {
   return (
     <div
-      className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0"
+      className="content-stretch flex flex-col gap-[40px] items-center sm:items-start relative shrink-0"
       data-name="Footer Menu Items"
     >
-      <p className="leading-[1.2] not-italic relative shrink-0 text-[22px] text-nowrap text-white whitespace-pre font-bold">
+      <p className="leading-[1.2] not-italic relative shrink-0 text-[22px] text-nowrap text-white whitespace-pre font-bold text-center sm:text-left">
         Contact
       </p>
       <Items1 />
@@ -73,10 +73,10 @@ function FooterMenuItems1() {
 function FooterMenuItems2() {
   return (
     <div
-      className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0"
+      className="content-stretch flex flex-col gap-[40px] items-center sm:items-start relative shrink-0"
       data-name="Footer Menu Items"
     >
-      <p className="leading-[1.2] not-italic relative shrink-0 text-[22px] text-nowrap text-white whitespace-pre font-bold">
+      <p className="leading-[1.2] not-italic relative shrink-0 text-[22px] text-nowrap text-white whitespace-pre font-bold text-center sm:text-left">
         Legal
       </p>
       <Items2 />
@@ -87,7 +87,7 @@ function FooterMenuItems2() {
 function Menu() {
   return (
     <div
-      className="content-stretch flex flex-col sm:flex-row items-start justify-between gap-8 sm:gap-0 relative shrink-0 w-full sm:w-auto sm:min-w-0 lg:min-w-[400px] xl:min-w-[607px]"
+      className="content-stretch flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-between gap-8 sm:gap-0 relative shrink-0 w-full sm:w-auto sm:min-w-0 lg:min-w-[400px] xl:min-w-[607px]"
       data-name="Menu"
     >
       <FooterMenuItems />
@@ -100,7 +100,7 @@ function Menu() {
 function Icons() {
   return (
     <div
-      className="content-stretch flex gap-[16px] items-start leading-none not-italic opacity-80 relative shrink-0 text-[24px] text-neutral-100 whitespace-pre flex-wrap"
+      className="flex gap-[16px] items-center justify-center sm:justify-start leading-none not-italic opacity-80 relative shrink-0 text-[24px] text-neutral-100 whitespace-pre flex-wrap w-full sm:w-auto"
       data-name="Icons"
     >
       <Instagram className="w-6 h-6 flex-shrink-0" />
@@ -113,10 +113,10 @@ function Icons() {
 function FollowUs() {
   return (
     <div
-      className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0 min-w-0"
+      className="content-stretch flex flex-col gap-[40px] items-center sm:items-start relative shrink-0 min-w-0"
       data-name="Follow Us"
     >
-      <p className="leading-[1.2] not-italic opacity-60 relative shrink-0 text-[18px] text-footer-text-light uppercase whitespace-pre font-bold">
+      <p className="leading-[1.2] not-italic opacity-60 relative shrink-0 text-[18px] text-footer-text-light uppercase whitespace-pre font-bold text-center sm:text-left">
         Follow Us
       </p>
       <Icons />
@@ -146,7 +146,11 @@ function TextField() {
 
 function SubscribeButton() {
   return (
-    <Button variant="primary" size="lg" className="max-[425px]:w-full">
+    <Button
+      variant="primary"
+      size="lg"
+      className="max-[425px]:w-full h-[48px] sm:h-[56px]"
+    >
       Subscribe
     </Button>
   );
@@ -171,10 +175,10 @@ function TextFieldButton() {
 function Subscription() {
   return (
     <div
-      className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0 w-full"
+      className="content-stretch flex flex-col gap-[40px] items-center sm:items-start relative shrink-0 w-full"
       data-name="Subscription"
     >
-      <p className="leading-[1.4] relative shrink-0 text-footer-text-lighter text-[18px] w-full font-bold">
+      <p className="leading-[1.4] relative shrink-0 text-footer-text-lighter text-[18px] w-full font-bold text-center sm:text-left">
         Receive exclusive offers in your mailbox
       </p>
       <TextFieldButton />
@@ -185,7 +189,7 @@ function Subscription() {
 function FollowSubscription() {
   return (
     <div
-      className="content-stretch flex flex-col gap-[43px] items-start relative shrink-0 w-full sm:w-auto lg:max-w-[483px] lg:flex-shrink"
+      className="content-stretch flex flex-col gap-[43px] items-center sm:items-start relative shrink-0 w-full sm:w-auto lg:max-w-[483px] lg:flex-shrink"
       data-name="Follow + Subscription"
     >
       <FollowUs />
@@ -209,7 +213,7 @@ function MenuSubscription() {
 function Copyright() {
   return (
     <div
-      className="content-stretch flex gap-[10px] items-center relative shrink-0 text-neutral-100 text-nowrap whitespace-pre min-w-0"
+      className="content-stretch flex gap-[10px] items-center justify-center sm:justify-start relative shrink-0 text-neutral-100 text-nowrap whitespace-pre min-w-0"
       data-name="Copyright"
     >
       <p className="font-normal leading-[1.2] relative shrink-0 text-[15px] max-[320px]:text-xs">
@@ -225,7 +229,7 @@ function Copyright() {
 function Company() {
   return (
     <div
-      className="content-stretch flex gap-[8px] items-start relative shrink-0 min-w-0"
+      className="content-stretch flex gap-[8px] items-center sm:items-start justify-center sm:justify-start relative shrink-0 min-w-0"
       data-name="Company"
     >
       <p className="leading-[1.2] relative shrink-0 text-[15px] max-[320px]:text-xs text-neutral-100 text-nowrap whitespace-pre font-bold break-words">
@@ -238,7 +242,7 @@ function Company() {
 function RIghts() {
   return (
     <div
-      className="content-stretch flex flex-col max-[320px]:flex-col sm:flex-row gap-[10px] items-start relative shrink-0 min-w-0"
+      className="content-stretch flex flex-col max-[320px]:flex-col sm:flex-row gap-[10px] items-center sm:items-start justify-center sm:justify-start relative shrink-0 min-w-0 w-full sm:w-auto"
       data-name="RIghts"
     >
       <Copyright />
@@ -263,7 +267,7 @@ function ThemeWagon() {
 function MadeBy() {
   return (
     <div
-      className="content-stretch flex flex-col max-[320px]:flex-col sm:flex-row gap-[8px] items-start relative shrink-0 min-w-0"
+      className="content-stretch flex flex-col max-[320px]:flex-col sm:flex-row gap-[8px] items-center sm:items-start justify-center sm:justify-start relative shrink-0 min-w-0"
       data-name="Made By"
     >
       <p className="font-normal leading-[1.2] relative shrink-0 text-neutral-100 text-nowrap whitespace-pre text-[15px] max-[320px]:text-xs">
@@ -277,7 +281,7 @@ function MadeBy() {
 function Rights() {
   return (
     <div
-      className="content-stretch flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0 relative shrink-0 w-full min-w-0"
+      className="content-stretch flex flex-col sm:flex-row items-center sm:items-center justify-center sm:justify-between gap-4 sm:gap-0 relative shrink-0 w-full min-w-0"
       data-name="Rights"
     >
       <RIghts />
@@ -289,7 +293,7 @@ function Rights() {
 function HrRights() {
   return (
     <div
-      className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full"
+      className="content-stretch flex flex-col gap-[16px] items-center sm:items-start relative shrink-0 w-full"
       data-name="HR + Rights"
     >
       <div className="h-0 relative shrink-0 w-full" data-name="HR">

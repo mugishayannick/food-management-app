@@ -162,7 +162,7 @@ export const FoodModal = memo(
             </h2>
             {/* General Error Message */}
             {errors._general && (
-              <div className="food-error-general bg-red-50 border border-red-200 rounded-lg p-4 text-error text-[14px]">
+              <div className="food-error-general bg-red-50 border border-red-200 rounded-[8px] p-4 text-error text-[14px]">
                 {errors._general}
               </div>
             )}
@@ -185,7 +185,7 @@ export const FoodModal = memo(
                   setFormData({ ...formData, food_name: e.target.value })
                 }
                 placeholder="Food name"
-                className="food-input w-full px-4 py-3 bg-gray-100 border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-text-primary"
+                className="food-input w-full px-4 py-3 bg-gray-100 border-0 rounded-[8px] focus:outline-none focus:ring-2 focus:ring-primary text-text-primary"
                 aria-describedby="food-name-error"
                 data-test-id="food-name-input"
               />
@@ -221,7 +221,7 @@ export const FoodModal = memo(
                   setFormData({ ...formData, food_rating: e.target.value })
                 }
                 placeholder="Food rating"
-                className="food-input w-full px-4 py-3 bg-gray-100 border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-text-primary"
+                className="food-input w-full px-4 py-3 bg-gray-100 border-0 rounded-[8px] focus:outline-none focus:ring-2 focus:ring-primary text-text-primary"
                 aria-describedby="food-rating-error"
                 data-test-id="food-rating-input"
               />
@@ -254,7 +254,7 @@ export const FoodModal = memo(
                   setFormData({ ...formData, food_image: e.target.value })
                 }
                 placeholder="Food image (link)"
-                className="food-input w-full px-4 py-3 bg-gray-100 border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-text-primary"
+                className="food-input w-full px-4 py-3 bg-gray-100 border-0 rounded-[8px] focus:outline-none focus:ring-2 focus:ring-primary text-text-primary"
                 aria-describedby="food-image-error"
                 data-test-id="food-image-input"
               />
@@ -287,7 +287,7 @@ export const FoodModal = memo(
                   setFormData({ ...formData, restaurant_name: e.target.value })
                 }
                 placeholder="Restaurant name"
-                className="food-input w-full px-4 py-3 bg-gray-100 border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-text-primary"
+                className="food-input w-full px-4 py-3 bg-gray-100 border-0 rounded-[8px] focus:outline-none focus:ring-2 focus:ring-primary text-text-primary"
                 aria-describedby="restaurant-name-error"
                 data-test-id="food-restaurant-input"
               />
@@ -320,7 +320,7 @@ export const FoodModal = memo(
                   setFormData({ ...formData, avatar: e.target.value })
                 }
                 placeholder="Restaurant logo (link)"
-                className="food-input w-full px-4 py-3 bg-gray-100 border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-text-primary"
+                className="food-input w-full px-4 py-3 bg-gray-100 border-0 rounded-[8px] focus:outline-none focus:ring-2 focus:ring-primary text-text-primary"
                 aria-describedby="restaurant-logo-error"
                 data-test-id="food-logo-input"
               />
@@ -349,7 +349,7 @@ export const FoodModal = memo(
                   ref={statusButtonRef}
                   type="button"
                   onClick={() => setIsStatusDropdownOpen(!isStatusDropdownOpen)}
-                  className="food-select w-full px-4 py-3 bg-gray-100 border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-text-primary cursor-pointer text-left flex items-center justify-between"
+                  className="food-select w-full px-4 py-3 bg-gray-100 border-0 rounded-[8px] focus:outline-none focus:ring-2 focus:ring-primary text-text-primary cursor-pointer text-left flex items-center justify-between"
                   aria-describedby="restaurant-status-error"
                   data-test-id="food-status-select"
                   aria-expanded={isStatusDropdownOpen}
@@ -422,7 +422,7 @@ export const FoodModal = memo(
                   editItem ? LOADING_MESSAGES.UPDATING : LOADING_MESSAGES.ADDING
                 }
                 fullWidth
-                className="food-save-button flex-1 rounded-lg"
+                className="food-save-button flex-1 rounded-[14px]"
                 data-test-id="food-save-btn"
               >
                 {editItem ? "Save" : "Add"}
@@ -433,7 +433,7 @@ export const FoodModal = memo(
                 size="md"
                 onClick={onClose}
                 fullWidth
-                className="food-cancel-button flex-1 rounded-lg"
+                className="food-cancel-button flex-1 rounded-[14px]"
                 data-test-id="food-cancel-btn"
               >
                 Cancel

@@ -149,7 +149,7 @@ function AddMealButton({ onClick }: { onClick: () => void }) {
       onClick={onClick}
       variant="primary"
       size="sm"
-      className="food-add-button w-[150px] max-[320px]:w-auto max-[320px]:min-w-0 max-[320px]:px-2"
+      className="food-add-button w-[150px] max-[320px]:w-auto max-[320px]:min-w-0 max-[320px]:px-2 rounded-[14px]"
       data-test-id="food-add-meal-btn"
     >
       <span className="text-sm sm:text-[18px] max-[320px]:text-xs">
@@ -162,7 +162,7 @@ function AddMealButton({ onClick }: { onClick: () => void }) {
 export function Header({ onAddMeal }: HeaderProps) {
   return (
     <header
-      className="food-header bg-white relative shadow-[0px_5px_10px_0px_rgba(255,174,0,0.26),0px_20px_40px_0px_rgba(255,174,0,0.29)] w-full"
+      className="food-header bg-white sticky top-0 z-20 shadow-[0px_5px_10px_0px_rgba(255,174,0,0.26),0px_20px_40px_0px_rgba(255,174,0,0.29)] w-full"
       data-name="Top Nav"
     >
       <div className="flex flex-row items-center w-full overflow-x-hidden">

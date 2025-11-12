@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import Image from "next/image";
 import { FoodCard } from "@/components/FoodCard";
 import { FoodModal } from "@/components/FoodModal";
@@ -21,7 +21,7 @@ import { toast } from "react-hot-toast";
 import { foodApi } from "@/lib/api";
 import { Button } from "@/components/Button";
 import { LOADING_MESSAGES, SUCCESS_MESSAGES } from "@/constants";
-import imgImageBase from "@/public/img/Food_image.png";
+import imgImageBase from "@/public/img/Image-Base.png";
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -33,6 +33,7 @@ export default function App() {
   } | null>(null);
   const [searchResults, setSearchResults] = useState<FoodItem[] | null>(null);
   const [isSearching, setIsSearching] = useState(false);
+  const [itemsToShow, setItemsToShow] = useState(4); // Initial number of items to display
   const { isModalOpen, editingItem, openModal, closeModal } = useFoodModal();
 
   const {
@@ -47,6 +48,19 @@ export default function App() {
     () => (searchResults !== null ? searchResults : foods),
     [searchResults, foods]
   );
+
+  // Get the items to actually display (for pagination)
+  const visibleFoods = useMemo(
+    () => displayedFoods.slice(0, itemsToShow),
+    [displayedFoods, itemsToShow]
+  );
+
+  const hasMoreItems = displayedFoods.length > itemsToShow;
+
+  // Reset items to show when search results change
+  useEffect(() => {
+    setItemsToShow(4);
+  }, [searchResults, foods]);
 
   const handleOperationSuccess = useCallback(() => {
     refetch();
@@ -171,7 +185,7 @@ export default function App() {
       <section className="food-hero bg-hero relative overflow-hidden w-full">
         <div className="relative min-h-[400px] sm:min-h-[500px] lg:h-[628px] overflow-hidden">
           {/* Background Image - Desktop Only */}
-          <div className="absolute top-[182px] left-[1098px] w-[604px] h-[505px] hidden lg:flex items-center justify-center">
+          <div className="absolute top-[182px] left-[1198px] w-[497px] h-[497px] hidden lg:flex items-center justify-center">
             <Image
               src={
                 typeof imgImageBase === "string"
@@ -179,9 +193,9 @@ export default function App() {
                   : imgImageBase.src || ""
               }
               alt="Food illustration"
-              className="object-contain"
-              width={604}
-              height={505}
+              className="object-contain drop-shadow-[-50px_0_60px_rgba(0,0,0,0.5)]"
+              width={497}
+              height={497}
               priority={false}
             />
           </div>
@@ -305,9 +319,9 @@ export default function App() {
           {/* Food Items Grid */}
           {!isLoadingFoods && !foodsError && (
             <>
-              {displayedFoods.length > 0 ? (
+              {visibleFoods.length > 0 ? (
                 <div className="food-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-[24px] mb-8 sm:mb-12 lg:mb-[88px] w-full">
-                  {displayedFoods.map((item) => (
+                  {visibleFoods.map((item) => (
                     <FoodCard
                       key={item.id}
                       item={item}
@@ -324,14 +338,15 @@ export default function App() {
                 </div>
               )}
 
-              {displayedFoods.length > 0 && (
+              {hasMoreItems && (
                 <div className="food-load-more flex justify-center">
                   <Button
                     variant="primary"
                     size="lg"
                     icon={<ChevronRight className="w-[18px] h-[18px]" />}
                     iconPosition="right"
-                    className="food-load-button leading-none"
+                    onClick={() => setItemsToShow((prev) => prev + 4)}
+                    className="food-load-button leading-none h-[48px] sm:h-[56px]"
                     data-test-id="food-load-more-btn"
                   >
                     <span className="text-[18px] font-bold">Load more</span>
