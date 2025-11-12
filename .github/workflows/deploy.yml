@@ -1,9 +1,8 @@
 name: Deploy to GitHub Pages
 
+# Disabled - GitHub Pages deployment is disabled (manual trigger only)
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch: # Requires manual trigger, won't auto-deploy
 
 permissions:
   contents: read
