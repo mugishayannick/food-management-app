@@ -34,9 +34,9 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <FoodModalProvider>
-          <div className="food-app bg-white min-h-screen flex flex-col w-full overflow-x-hidden">
+          <div className="food-app bg-white min-h-screen flex flex-col w-full">
             <HeaderWrapper />
-            <main className="flex-1 w-full">{children}</main>
+            <main className="flex-1 w-full overflow-x-hidden">{children}</main>
             <Footer />
           </div>
           <Toaster

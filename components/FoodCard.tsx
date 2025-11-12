@@ -1,7 +1,7 @@
 import { useState, useRef, memo, useMemo, useCallback } from "react";
 import Image from "next/image";
 import { FoodItem } from "../types/food";
-import { Star, EllipsisVertical, Tag } from "lucide-react";
+import { Star, EllipsisVertical } from "lucide-react";
 import { getFoodImage, getRestaurantLogo } from "@/utils/fallbackImages";
 import {
   getFoodPrice,
@@ -121,7 +121,13 @@ export const FoodCard = memo(
           {foodPrice !== "0.00" && (
             <div className="absolute left-[24px] top-[24px]">
               <div className="food-price bg-primary flex gap-[10px] items-center px-[16px] py-[8px] rounded-[8px] text-white">
-                <Tag size={20} className="flex-shrink-0" />
+                <Image
+                  src="/icons/Icon.png"
+                  alt="Price badge"
+                  width={20}
+                  height={20}
+                  className="flex-shrink-0"
+                />
                 <p className="text-[22px] font-bold whitespace-nowrap">
                   ${foodPrice}
                 </p>

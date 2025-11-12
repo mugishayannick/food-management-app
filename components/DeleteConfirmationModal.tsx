@@ -55,7 +55,7 @@ export const DeleteConfirmationModal = ({
               isLoading={isLoading}
               loadingText="Deleting..."
               fullWidth
-              className="food-delete-confirm-button flex-1 rounded-lg"
+              className="food-delete-confirm-button flex-1 rounded-[14px]"
               data-test-id="food-delete-confirm-btn"
             >
               Yes
@@ -67,7 +67,7 @@ export const DeleteConfirmationModal = ({
               onClick={onClose}
               disabled={isLoading}
               fullWidth
-              className="food-cancel-button flex-1 rounded-lg"
+              className="food-cancel-button flex-1 rounded-[14px]"
               data-test-id="food-delete-cancel-btn"
             >
               Cancel

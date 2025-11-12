@@ -65,7 +65,7 @@ export const Dropdown = ({
       {/* Dropdown Menu */}
       <div
         ref={dropdownRef}
-        className={`food-dropdown absolute ${positionClasses[position]} ${alignClasses[align]} bg-white box-border flex flex-col items-stretch shadow-2xl border-0 z-[9999] rounded-lg min-w-[120px] overflow-hidden`}
+        className={`food-dropdown absolute ${positionClasses[position]} ${alignClasses[align]} bg-white box-border flex flex-col items-stretch shadow-2xl border-0 z-[9999] rounded-[5px] min-w-[120px] overflow-hidden`}
         style={{ width }}
         role="menu"
         aria-orientation="vertical"

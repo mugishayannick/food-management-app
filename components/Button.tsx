@@ -39,7 +39,7 @@ export const Button = ({
 }: ButtonProps) => {
   // Base classes
   const baseClasses =
-    "inline-flex items-center justify-center font-medium transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer";
+    "inline-flex items-center justify-center font-bold transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer";
 
   // Variant styles
   const variantClasses = {
